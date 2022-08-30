@@ -2,12 +2,13 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { Pressable, TextInput } from 'react-native-web';
 import React, { useState, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
 
-const root = createRoot(document.getElementById("root"));
+
 
 function Home({navigation}){
     const [titulo, tituloChange] = React.useState('');
+    
+
 
     async function addConteudo(){
 
