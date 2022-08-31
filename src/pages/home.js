@@ -2,15 +2,26 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { Pressable, TextInput } from 'react-native-web';
 import React, { useState, useEffect } from 'react';
-
+import { db } from '../functions/firebase';
+import { addDoc, collection } from 'firebase/firestore';
 
 
 function Home({navigation}){
     const [titulo, tituloChange] = React.useState('');
-    
+      
 
 
     async function addConteudo(){
+        console.log(titulo);
+        const musicCollection = collection(db, "lista-musicas");
+
+        const musica = await addDoc((musicCollection), {
+            music: titulo,
+            add_to_list: 0
+        })
+        
+
+        // console.log("Id salvo da musica: ", musica.id);
 
     }
 
@@ -19,7 +30,7 @@ function Home({navigation}){
         <View style={styles.screen}>
             <Text>Insira a música abaixo</Text>
             <TextInput style={styles.textInput}
-                        placeholder="Música"
+                        placeholder="https://open.spotify.com ..."
                         onChangeText={tituloChange}
             />
             <Pressable onPress={()=> addConteudo() }style={styles.btnSalvar}>
