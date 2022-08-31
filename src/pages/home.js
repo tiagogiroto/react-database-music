@@ -12,7 +12,7 @@ function Home({navigation}){
 
 
     async function addConteudo(){
-        console.log(titulo);
+
         const musicCollection = collection(db, "lista-musicas");
 
         const musica = await addDoc((musicCollection), {
