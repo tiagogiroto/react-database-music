@@ -20,7 +20,7 @@ function Home({navigation}){
         })
         
         if(musica.id){
-            console.log('Id no sistema : ',music.id);
+            console.log('Id no sistema : ',musica.id);
         } else {
             console.log('Erro');
         }
