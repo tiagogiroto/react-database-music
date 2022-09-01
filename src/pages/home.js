@@ -24,9 +24,6 @@ function Home({navigation}){
         } else {
             console.log('Erro');
         }
-
-        console.log("Id salvo da musica: ", titulo.target.value);
-
     }
 
 
@@ -35,18 +32,13 @@ function Home({navigation}){
             <Container fluid="md ">
                 <Form className="p-0">
                     <Row style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
-                        {/* <Pressable onPress={()=> addConteudo() }style={styles.btnSalvar}>
-                            <Text style={styles.textBtn}>Enviar</Text>
-                        </Pressable>    */}
-
                         <Col>
-
                             <a>Insira a música abaixo</a>
 
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
                                 <Form.Control type="text" placeholder="https://open.spotify.com ..." onChange={tituloChange} />
  
-                                <Button variant="primary" type="submit"> Adicionar  </Button>
+                                <Button variant="primary" onClick={()=> addConteudo()}> Adicionar  </Button>
                             </Form.Group>
                         
                         </Col>
