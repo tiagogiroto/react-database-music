@@ -8,16 +8,22 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 
 function Home({navigation}){
     const [titulo, tituloChange] = useState('');
+    const [msgReturn, msgReturnChange] = useState('');
 
     async function addConteudo(){
 
-        // const musicCollection = collection(db, "lista-musicas");
+        const musicCollection = collection(db, "lista-musicas");
 
-        // const musica = await addDoc((musicCollection), {
-        //     music: titulo.target.value,
-        //     add_to_list: 0
-        // })
+        const musica = await addDoc((musicCollection), {
+            music: titulo.target.value,
+            add_to_list: 0
+        })
         
+        if(musica.id){
+            console.log('Id no sistema : ',music.id);
+        } else {
+            console.log('Erro');
+        }
 
         console.log("Id salvo da musica: ", titulo.target.value);
 
