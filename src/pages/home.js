@@ -1,52 +1,72 @@
 
-import { View, Text, StyleSheet } from 'react-native';
-import { Pressable, TextInput } from 'react-native-web';
 import React, { useState, useEffect } from 'react';
 import { db } from '../functions/firebase';
 import { addDoc, collection } from 'firebase/firestore';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+
 
 
 function Home({navigation}){
-    const [titulo, tituloChange] = React.useState('');
-      
-
+    const [titulo, tituloChange] = useState('');
 
     async function addConteudo(){
 
-        const musicCollection = collection(db, "lista-musicas");
+        // const musicCollection = collection(db, "lista-musicas");
 
-        const musica = await addDoc((musicCollection), {
-            music: titulo,
-            add_to_list: 0
-        })
+        // const musica = await addDoc((musicCollection), {
+        //     music: titulo.target.value,
+        //     add_to_list: 0
+        // })
         
 
-        // console.log("Id salvo da musica: ", musica.id);
+        console.log("Id salvo da musica: ", titulo.target.value);
 
     }
 
 
     return(
-        <View style={styles.screen}>
-            <Text>Insira a música abaixo</Text>
-            <TextInput style={styles.textInput}
-                        placeholder="https://open.spotify.com ..."
-                        onChangeText={tituloChange}
-            />
-            <Pressable onPress={()=> addConteudo() }style={styles.btnSalvar}>
-                <Text style={styles.textBtn}>Enviar</Text>
-            </Pressable>   
-        </View>
+        <div style={styles.screen}>
+            <Container fluid="md ">
+                <Form className="p-0">
+                    <Row style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
+                        {/* <Pressable onPress={()=> addConteudo() }style={styles.btnSalvar}>
+                            <Text style={styles.textBtn}>Enviar</Text>
+                        </Pressable>    */}
+
+                        <Col>
+
+                            <a>Insira a música abaixo</a>
+
+                            <Form.Group className="mb-3" controlId="formBasicEmail" >
+                                <Form.Control type="text" placeholder="https://open.spotify.com ..." onChange={tituloChange} />
+ 
+                                <Button variant="primary" type="submit"> Adicionar  </Button>
+                            </Form.Group>
+                        
+                        </Col>
+                    </Row>
+                </Form>
+            </Container>
+        </div>
     )
 }
 
 
-const styles = StyleSheet.create({
+const styles = {
+
+    content:{  
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        margin: '-50px 0 0 -50px'
+    },
     screen: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+        backgroundColor: '#282c34',
+        height: '100vh',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white',
     },
     textInput: {
         width: '80%',
@@ -75,7 +95,7 @@ const styles = StyleSheet.create({
         letterSpacing: 0.25,
         color: 'white',
     }
-});
+};
 
 
 export default Home;
