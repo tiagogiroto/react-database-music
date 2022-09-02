@@ -1,12 +1,21 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { db } from '../functions/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-
+import Modal from 'react-bootstrap/Modal';
 
 
 function Home({navigation}){
+    
+    // modal actions
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    // modal actions
+
+    const [modalMsg, modalMsgChange] = useState('');
+    const [msgEnviada, msgEnviadaChange] = useState('');
     const [titulo, tituloChange] = useState('');
     const [msgReturn, msgReturnChange] = useState('');
 
@@ -20,9 +29,13 @@ function Home({navigation}){
         })
         
         if(musica.id){
-            console.log('Id no sistema : ',musica.id);
+            setShow(true);
+            msgEnviadaChange("Música adicionada com sucesso !");
+            
+        //     console.log('Id no sistema : ',musica.id);
         } else {
-            console.log('Erro');
+            setShow(true);
+            msgEnviadaChange("Música não enviada !");
         }
     }
 
@@ -31,6 +44,21 @@ function Home({navigation}){
         <div style={styles.screen}>
             <Container fluid="md ">
                 <Form className="p-0">
+                    <Row>
+                        {/* <a>teste</a> */}
+                        <>
+                            <Modal show={show} onHide={handleClose} size="lg" aria-labelledby="contained-modal-title-vcenter" centered className={modalMsg}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Aviso</Modal.Title>                              
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <p>teste</p>
+                                    <p>{msgEnviada}</p>
+                                </Modal.Body>
+                            </Modal>
+                        </>
+
+                    </Row>
                     <Row style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
                         <Col>
                             <a>Insira a música abaixo</a>
