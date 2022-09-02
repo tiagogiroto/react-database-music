@@ -52,7 +52,6 @@ function Home({navigation}){
                                     <Modal.Title>Aviso</Modal.Title>                              
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <p>teste</p>
                                     <p>{msgEnviada}</p>
                                 </Modal.Body>
                             </Modal>
